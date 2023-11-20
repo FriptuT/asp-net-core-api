@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using webAPI.Data;
+using webAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddDbContext<ROWalksDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ROWalksConnectionString"));
 });
+
+builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
 
 // services cors
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
